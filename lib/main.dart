@@ -1,97 +1,89 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_headless_cms/widgets/card.dart';
-import 'package:flutter_headless_cms/widgets/sidebar.dart';
+import 'package:video_player/video_player.dart';
+import 'package:video_player_web/video_player_web.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/':(context) => const HomePage(),
+        '/': (context) => const HomePage(),
       },
     ));
 
-  class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  late VideoPlayerController _controller;
+  @override
+  void initState() {
+    super.initState();
+    _controller = VideoPlayerController.asset("assets/natureBg.mp4")
+      ..initialize().then((_) {
+        _controller.play();
+        _controller.setLooping(true);
+        // Ensure the first frame is shown after the video is initialized
+        setState(() {});
+      });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LayoutBuilder(builder: (BuildContext, BoxConstraints constraints) {
-                if (constraints.maxWidth > 600) {
-                  return WebView(context);
-                } else {
-                   return mobileView(context);
-                }
-              })
-    );
-  }
-}
-
-
-Scaffold WebView(BuildContext context){
-  return Scaffold(
-  appBar: AppBar(
-    title: Text("GovPH"),
-    actions: <Widget>[
-          TextButton(
-            style: ButtonStyle(
-              foregroundColor: MaterialStatePropertyAll(Colors.white)
-            ),
-            onPressed: () {},
-            child: const Text('Action 1'),
-          ),
-          InkWell(
-            child: TextButton(
-              style: ButtonStyle(
-                foregroundColor: MaterialStatePropertyAll(Colors.white)
+      body: Stack(
+        children: <Widget>[
+          SizedBox.expand(
+            child: FittedBox(
+              fit: BoxFit.cover,
+              child: SizedBox(
+                width: _controller.value.size?.width ?? 0,
+                height: _controller.value.size?.height ?? 0,
+                child: VideoPlayer(_controller),
               ),
-              onPressed: () {},
-              child: const Text('Action 2'),
             ),
           ),
         ],
       ),
-  
-    body: 
-          Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  height: 400,
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.blue,
-                ),
-                Container(
-                  height: 50,
-                  width: MediaQuery.of(context).size.width,
-                  color: Colors.blueGrey,
-                ),
-                MyCard()
-              ],
-            )
-              
-          );
-          
-          
-        
-  
-      
+    );
+  }
 }
 
-Scaffold mobileView (BuildContext context){
-  return Scaffold(
-    
-    body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Center(
-              child: Text("hi"),
-            )
-          ],
-        ),
-      )
-  );
-}
+// Scaffold WebView(BuildContext context) {
+//   return Scaffold(
+//      body: Stack(
+//           children: <Widget>[
+//             SizedBox.expand(
+//               child: FittedBox(
+//                 fit: BoxFit.cover,
+//                 child: SizedBox(
+//                   width: _controller.value.size?.width ?? 0,
+//                   height: _controller.value.size?.height ?? 0,
+//                   child: VideoPlayer(_controller),
+//                 ),
+//               ),
+//             ),
+          
+//           ],
+//         ),
+//       );
+// }
+
+// Scaffold mobileView(BuildContext context) {
+//   return Scaffold(
+//       body: Container(
+//     width: MediaQuery.of(context).size.width,
+//     height: MediaQuery.of(context).size.height,
+//     child: Column(
+//       mainAxisAlignment: MainAxisAlignment.center,
+//       children: [
+//         Center(
+//           child: Text("hi"),
+//         )
+//       ],
+//     ),
+//   ));
+// }

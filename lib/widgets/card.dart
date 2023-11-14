@@ -7,10 +7,10 @@ class MyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       child: SizedBox(
-          width: 300,
-          height: 100,
-          child: Center(child: Text('Elevated Card')),
-        ),
+        width: 300,
+        height: 100,
+        child: Center(child: Text('Elevated Card')),
+      ),
     );
   }
 }
