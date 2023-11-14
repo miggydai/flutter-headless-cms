@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_headless_cms/widgets/card.dart';
+import 'package:flutter_headless_cms/widgets/sidebar.dart';
 
 void main() => runApp(MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -27,19 +29,53 @@ void main() => runApp(MaterialApp(
 
 Scaffold WebView(BuildContext context){
   return Scaffold(
-   body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-          Center(
-            child: Text("hi"),
-          )
-          ],
-        ),
-      )
-      );
+  appBar: AppBar(
+    title: Text("GovPH"),
+    actions: <Widget>[
+          TextButton(
+            style: ButtonStyle(
+              foregroundColor: MaterialStatePropertyAll(Colors.white)
+            ),
+            onPressed: () {},
+            child: const Text('Action 1'),
+          ),
+          InkWell(
+            child: TextButton(
+              style: ButtonStyle(
+                foregroundColor: MaterialStatePropertyAll(Colors.white)
+              ),
+              onPressed: () {},
+              child: const Text('Action 2'),
+            ),
+          ),
+        ],
+      ),
+  
+    body: 
+          Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  height: 400,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.blue,
+                ),
+                Container(
+                  height: 50,
+                  width: MediaQuery.of(context).size.width,
+                  color: Colors.blueGrey,
+                ),
+                MyCard()
+              ],
+            )
+              
+          );
+          
+          
+        
+  
+      
 }
 
 Scaffold mobileView (BuildContext context){
