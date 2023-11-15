@@ -8,8 +8,12 @@ class MyCard extends StatelessWidget {
     return Card(
       child: SizedBox(
         width: 300,
-        height: 100,
-        child: Center(child: Text('Elevated Card')),
+        height: 400,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [Icon(Icons.ac_unit)],
+        ),
       ),
     );
   }
