@@ -1,12 +1,12 @@
 class Posts {
-  int id;
+  String id;
   String title;
   String content;
   String urlImage;
   DateTime datePosted;
 
   Posts({
-    this.id = 0,
+    this.id = "",
     this.title = "",
     this.content = "",
     this.urlImage = "",
