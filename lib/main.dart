@@ -160,9 +160,9 @@ class _HomePageState extends State<HomePage> {
                           if (allPosts.isNotEmpty) {
                             return MyCard(post: allPosts[index]);
                           } else
-                            return Text("no posts");
+                            return LinearProgressIndicator();
                         })
-                    : Center(child: Text("no posts"))),
+                    : Center(child: CircularProgressIndicator())),
           )
         ],
       ),
